@@ -16,7 +16,7 @@ makeCacheMatrix <- function(x = matrix(), cache_mat)
         calc <- FALSE
         message ("printing cache_mat")
         print (cache_mat)
-
+        
         if ((identical (x, cache_mat)) == FALSE)
         {
                 calc <- TRUE
@@ -49,54 +49,24 @@ cacheSolve <- function(x = matrix ())
                 ## call makeCacheMatrix function to check if we
                 ## need to read inv_mat from cache or not
                 
-                message ("printing cache_mat before calling sub Func")
-                print (cache_mat)
-                
                 calculate_inv <- makeCacheMatrix (x, cache_mat)
                 
                 if (calculate_inv == TRUE)
                 {
-                ## x has changed. we need to calculate the inverse
-                
-                message ("x has changed. Recalculating the inverted matrix (inv_mat)")        
                         
-                inv_mat <- solve (x) ## generate inv_mat       
+                        ## x has changed. we need to calculate the inverse
+                        
+                        message ("x has changed. Recalculating the inverted matrix (inv_mat)")        
+                        
+                        inv_mat <- solve (x) ## generate inv_mat       
                 }
         }
-
+        
         ## Save input matrix (x) in cache_mat so we can use it next time
         ## to check to see if we should get the inverse from the cache
         
         cache_mat <<- x 
-        message ("printing cache_mat at the end of the main function")
-        print (cache_mat)
         
         message ("printing inv_mat at the end of the main function")
         print (inv_mat)
-        
-        ### creates an identity matrix for x. It will be used to
-        ### confirm that the inversion was done correctly
-        
-        mat_row <- nrow (x)
-        my_identity <<- diag (mat_row) 
-
-        message ("printing the identity matrix at the end of the main function")
-        print (my_identity)
-        
-        return (inv_mat)
 }
-
-## Verification
-
-
-x <- matrix (c (4, 2, 7, 6, 4, 2, 7, 6, 4), nrow = 3, ncol =3)
-y <- matrix (c (4, 2, 7, 6, 4, 2, 7, 6, 4, 2, 7, 6), nrow = 4, ncol =4)
-z <- matrix (c (4, 2, 7, 6), nrow = 2, ncol =2)
-
-
-inv_mat <- cacheSolve (x)
-inv_mat
-x_mult_inv <- x %*% inv_mat 
-x_mult_inv
-identical (x_mult_inv, identity)
-
