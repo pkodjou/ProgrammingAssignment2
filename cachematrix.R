@@ -1,6 +1,4 @@
-## Put comments here that give an overall description of what your
-## functions do
-## Write a short comment describing this function
+##### Revision in December ####
 
 ## This function is checking if the matrix x has changed
 ## since the inverse of x was created. 
